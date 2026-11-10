@@ -6,16 +6,22 @@
 RewriteEngine On
 RewriteRule ^(\.git|\.codex|\.local-backups|scripts|tests)(/|$) - [F,L,NC]
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-RewriteBase /tienda/
+# Base dinámica: /tienda/ en local, / en Azure
+RewriteCond %{HTTP_HOST} ^localhost [NC,OR]
+RewriteCond %{HTTP_HOST} ^127\.0\.0\.1 [NC]
+RewriteRule ^ - [E=WP_BASE:/tienda/]
+RewriteCond %{HTTP_HOST} !^localhost [NC]
+RewriteCond %{HTTP_HOST} !^127\.0\.0\.1 [NC]
+RewriteRule ^ - [E=WP_BASE:/]
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /tienda/index.php [L]
+RewriteRule . %{ENV:WP_BASE}index.php [L]
 </IfModule>
 # BEGIN WordPress
 # Las directivas (líneas) entre «BEGIN WordPress» y «END WordPress» son
 # generadas dinámicamente y solo deberían ser modificadas mediante filtros de WordPress.
-# Cualquier cambio en las directivas que hay entre esos marcadores serán sobrescritas.
+# Cualquier cambio en las directivas que haya entre esos marcadores serán sobrescritas.
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
