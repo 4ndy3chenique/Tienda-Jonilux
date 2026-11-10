@@ -25,8 +25,10 @@ $db_name = defined('DB_NAME') ? DB_NAME : (getenv('DB_NAME') ?: '');
 $db_host = preg_replace('/:\d+$/', '', (string) $db_host);
 $port = 3306;
 
-$ssl_ca = getenv('MYSQL_SSL_CA') ?: '';
-if ($ssl_ca === '') {
+// SSL opcional: solo si DB_SSL=true
+$db_ssl = filter_var(getenv('DB_SSL') ?: false, FILTER_VALIDATE_BOOLEAN);
+$ssl_ca = $db_ssl ? (getenv('MYSQL_SSL_CA') ?: '') : '';
+if ($db_ssl && $ssl_ca === '') {
     $candidates = [
         __DIR__ . '/DigiCertGlobalRootCA.crt.pem',
         __DIR__ . '/DigiCertGlobalRootCA.crt',
@@ -43,6 +45,7 @@ if ($ssl_ca === '') {
 echo "DB_HOST=" . $db_host . "\n";
 echo "DB_USER=" . $db_user . "\n";
 echo "DB_NAME=" . $db_name . "\n";
+echo "DB_SSL=" . ($db_ssl ? 'true' : 'false') . "\n";
 echo "SSL_CA=" . ($ssl_ca !== '' ? $ssl_ca : '(none)') . "\n";
 echo "SSL_CA_EXISTS=" . ($ssl_ca !== '' && is_file($ssl_ca) ? 'yes' : 'no') . "\n";
 echo "MYSQLI_CLIENT_SSL=" . (defined('MYSQLI_CLIENT_SSL') ? MYSQLI_CLIENT_SSL : 'undefined') . "\n";
@@ -63,7 +66,7 @@ if (!$mysqli) {
 
 mysqli_options($mysqli, MYSQLI_OPT_CONNECT_TIMEOUT, 10);
 
-if ($ssl_ca !== '' && is_file($ssl_ca)) {
+if ($db_ssl && $ssl_ca !== '' && is_file($ssl_ca)) {
     $ssl_ok = @mysqli_ssl_set($mysqli, null, null, $ssl_ca, null, null);
     echo "SSL_SET=" . ($ssl_ok ? 'yes' : 'no') . "\n";
 } else {
@@ -71,7 +74,7 @@ if ($ssl_ca !== '' && is_file($ssl_ca)) {
 }
 @ob_flush(); @flush();
 
-$flags = defined('MYSQLI_CLIENT_SSL') ? MYSQLI_CLIENT_SSL : 0;
+$flags = ($db_ssl && defined('MYSQLI_CLIENT_SSL')) ? MYSQLI_CLIENT_SSL : 0;
 echo "CONNECTING...\n";
 @ob_flush(); @flush();
 

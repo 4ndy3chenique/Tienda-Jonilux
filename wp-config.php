@@ -46,12 +46,11 @@ if (file_exists(__DIR__ . '/wp-config-local.php')) {
     define('WP_HOME', getenv('WP_HOME') ?: $protocol . '://' . $host);
     define('WP_SITEURL', getenv('WP_SITEURL') ?: $protocol . '://' . $host);
 
-    // MySQL SSL para Azure Database for MySQL
-    $mysql_ssl_ca = getenv('MYSQL_SSL_CA') ?: '';
-    if ($mysql_ssl_ca !== '' || getenv('DB_SSL')) {
-        if (!defined('MYSQL_SSL_CA')) {
-            define('MYSQL_SSL_CA', $mysql_ssl_ca);
-        }
+    // MySQL SSL para Azure Database for MySQL (opcional, activado solo con DB_SSL=true)
+    $db_ssl = filter_var(getenv('DB_SSL') ?: false, FILTER_VALIDATE_BOOLEAN);
+    $mysql_ssl_ca = $db_ssl ? (getenv('MYSQL_SSL_CA') ?: '') : '';
+    if ($db_ssl && $mysql_ssl_ca !== '') {
+        define('MYSQL_SSL_CA', $mysql_ssl_ca);
     }
 }
 
@@ -59,9 +58,9 @@ if (!defined('ABSPATH')) {
     define('ABSPATH', __DIR__ . '/');
 }
 
-// Requerido para conexiones cifradas con Azure Database for MySQL
+// SSL para Azure Database for MySQL: solo si DB_SSL=true
 if (!defined('MYSQL_CLIENT_FLAGS')) {
-    define('MYSQL_CLIENT_FLAGS', MYSQLI_CLIENT_SSL);
+    define('MYSQL_CLIENT_FLAGS', $db_ssl ? MYSQLI_CLIENT_SSL : 0);
 }
 
 require_once ABSPATH . 'wp-settings.php';
