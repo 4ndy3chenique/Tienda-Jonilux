@@ -15,10 +15,24 @@ if (file_exists(__DIR__ . '/wp-config-local.php')) {
     $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
     $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
 
-    define('DB_NAME', getenv('DB_NAME') ?: 'tienda_wp');
-    define('DB_USER', getenv('DB_USER') ?: 'root');
-    define('DB_PASSWORD', getenv('DB_PASSWORD') ?: '');
-    define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+    $db_name = getenv('DB_NAME') ?: 'tienda_wp';
+    $db_user = getenv('DB_USER') ?: 'root';
+    $db_password = getenv('DB_PASSWORD') ?: '';
+    $db_host = getenv('DB_HOST') ?: 'localhost';
+
+    // Compatibilidad Azure Database for MySQL: formato usuario@servidor (Single Server)
+    $db_host_name = preg_replace('/:\d+$/', '', $db_host);
+    if (strpos($db_host_name, 'mysql.database.azure.com') !== false && strpos($db_user, '@') === false) {
+        $server_short = explode('.', $db_host_name)[0];
+        if ($server_short !== '') {
+            $db_user .= '@' . $server_short;
+        }
+    }
+
+    define('DB_NAME', $db_name);
+    define('DB_USER', $db_user);
+    define('DB_PASSWORD', $db_password);
+    define('DB_HOST', $db_host);
     define('DB_CHARSET', 'utf8mb4');
     define('DB_COLLATE', '');
 
@@ -39,14 +53,21 @@ if (file_exists(__DIR__ . '/wp-config-local.php')) {
     define('WP_SITEURL', getenv('WP_SITEURL') ?: $protocol . '://' . $host);
 
     // MySQL SSL para Azure Database for MySQL
-    if (getenv('MYSQL_SSL_CA') || getenv('DB_SSL')) {
-        define('MYSQL_CLIENT_FLAGS', MYSQLI_CLIENT_SSL);
-        define('MYSQL_SSL_CA', getenv('MYSQL_SSL_CA') ?: '');
+    $mysql_ssl_ca = getenv('MYSQL_SSL_CA') ?: '';
+    if ($mysql_ssl_ca !== '' || getenv('DB_SSL')) {
+        if (!defined('MYSQL_SSL_CA')) {
+            define('MYSQL_SSL_CA', $mysql_ssl_ca);
+        }
     }
 }
 
 if (!defined('ABSPATH')) {
     define('ABSPATH', __DIR__ . '/');
+}
+
+// Requerido para conexiones cifradas con Azure Database for MySQL
+if (!defined('MYSQL_CLIENT_FLAGS')) {
+    define('MYSQL_CLIENT_FLAGS', MYSQLI_CLIENT_SSL);
 }
 
 require_once ABSPATH . 'wp-settings.php';
