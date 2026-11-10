@@ -94,7 +94,7 @@ jobs:
           package: .
           clean: true
           restart: true
-          startup-command: '/home/site/wwwroot/startup.sh'
+          startup-command: 'bash /home/site/wwwroot/startup.sh'
           resource-group-name: ${{ secrets.AZURE_RESOURCE_GROUP }}
 
       - name: Arrancar App Service
