@@ -20,14 +20,8 @@ if (file_exists(__DIR__ . '/wp-config-local.php')) {
     $db_password = getenv('DB_PASSWORD') ?: '';
     $db_host = getenv('DB_HOST') ?: 'localhost';
 
-    // Compatibilidad Azure Database for MySQL: formato usuario@servidor (Single Server)
-    $db_host_name = preg_replace('/:\d+$/', '', $db_host);
-    if (strpos($db_host_name, 'mysql.database.azure.com') !== false && strpos($db_user, '@') === false) {
-        $server_short = explode('.', $db_host_name)[0];
-        if ($server_short !== '') {
-            $db_user .= '@' . $server_short;
-        }
-    }
+    // Azure Database for MySQL: usar FQDN sin puerto en DB_HOST
+    $db_host = preg_replace('/:\d+$/', '', $db_host);
 
     define('DB_NAME', $db_name);
     define('DB_USER', $db_user);
