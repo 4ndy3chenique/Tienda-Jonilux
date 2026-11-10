@@ -1,0 +1,14 @@
+.git/
+.github/
+.codex/
+.local-backups/
+tests/
+scripts/
+database/
+node_modules/
+*.sql
+*.log
+*.zip
+Eva T1 EB.docx
+Eva T1 EB.pdf
+extracted_eva_text.txt

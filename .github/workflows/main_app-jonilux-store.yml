@@ -9,6 +9,11 @@ on:
       - 'main'
   workflow_dispatch:
 
+# Evita despliegues solapados y que un push cancele uno en curso
+concurrency:
+  group: deploy-app-jonilux-store
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -60,6 +65,12 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_F73A8D95C18B4089BB2A7CC020C53BED }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A3F4E39DF4944265B09B120D1C4AA73F }}
 
+      - name: Obtener resource group
+        run: echo "RESOURCE_GROUP=$(az webapp list --query \"[?name=='app-jonilux-store'].resourceGroup\" -o tsv)" >> $GITHUB_ENV
+
+      - name: Detener App Service
+        run: az webapp stop --name app-jonilux-store --resource-group "$RESOURCE_GROUP"
+
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
@@ -67,4 +78,8 @@ jobs:
           app-name: 'app-jonilux-store'
           slot-name: 'Production'
           package: .
-          
+          clean: true
+          restart: true
+
+      - name: Arrancar App Service
+        run: az webapp start --name app-jonilux-store --resource-group "$RESOURCE_GROUP"
