@@ -68,6 +68,20 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_F73A8D95C18B4089BB2A7CC020C53BED }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A3F4E39DF4944265B09B120D1C4AA73F }}
 
+      - name: Configurar NGINX y variables de entorno
+        run: |
+          az webapp config set --name app-jonilux-store --resource-group tienda-jonilux --startup-command "/home/site/wwwroot/startup.sh"
+          az webapp config appsettings set --name app-jonilux-store --resource-group tienda-jonilux --settings \
+            DB_NAME=tienda_wp \
+            DB_USER=JONILUX \
+            DB_PASSWORD=${{ secrets.AZURE_DB_PASSWORD }} \
+            DB_HOST=mysql-jonilux-db.mysql.database.azure.com:3306 \
+            WP_HOME=https://app-jonilux-store-ddhpbxfdd5a4g6ff.brazilsouth-01.azurewebsites.net \
+            WP_SITEURL=https://app-jonilux-store-ddhpbxfdd5a4g6ff.brazilsouth-01.azurewebsites.net \
+            MYSQL_SSL_CA=/home/site/wwwroot/bin/DigiCertGlobalRootG2.crt.pem \
+            WEBSITES_PHP_VERSION=8.5 \
+            WEBSITES_ENABLE_APP_SERVICE_STORAGE=true
+
       - name: Detener App Service
         if: ${{ env.AZURE_RESOURCE_GROUP != '' }}
         run: az webapp stop --name app-jonilux-store --resource-group "$AZURE_RESOURCE_GROUP"
