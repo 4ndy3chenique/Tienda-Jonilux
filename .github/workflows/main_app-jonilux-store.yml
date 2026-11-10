@@ -81,6 +81,9 @@ jobs:
             WEBSITES_PHP_VERSION=8.5 \
             WEBSITES_ENABLE_APP_SERVICE_STORAGE=true
 
+      - name: Configurar comando de inicio
+        run: az webapp config set --name app-jonilux-store --resource-group tienda-jonilux --startup-file "/home/site/wwwroot/startup.sh"
+
       - name: Detener App Service
         if: ${{ env.AZURE_RESOURCE_GROUP != '' }}
         run: az webapp stop --name app-jonilux-store --resource-group "$AZURE_RESOURCE_GROUP"
@@ -94,7 +97,6 @@ jobs:
           package: .
           clean: true
           restart: true
-          startup-command: 'bash /home/site/wwwroot/startup.sh'
           resource-group-name: ${{ secrets.AZURE_RESOURCE_GROUP }}
 
       - name: Arrancar App Service
