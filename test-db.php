@@ -45,13 +45,16 @@ echo "DB_USER=" . $db_user . "\n";
 echo "DB_NAME=" . $db_name . "\n";
 echo "SSL_CA=" . ($ssl_ca !== '' ? $ssl_ca : '(none)') . "\n";
 echo "SSL_CA_EXISTS=" . ($ssl_ca !== '' && is_file($ssl_ca) ? 'yes' : 'no') . "\n";
-echo "MYSQLI_CLIENT_SSL=" . (defined('MYSQLI_CLIENT_SSL') ? MYSQLI_CLIENT_SSL : 'undefined') . "\n\n";
+echo "MYSQLI_CLIENT_SSL=" . (defined('MYSQLI_CLIENT_SSL') ? MYSQLI_CLIENT_SSL : 'undefined') . "\n";
+echo "PHP_VERSION=" . PHP_VERSION . "\n\n";
+@ob_flush(); @flush();
 
 if (!function_exists('mysqli_init')) {
     echo "ERROR: extensión mysqli no disponible\n";
     exit(1);
 }
 
+mysqli_report(MYSQLI_REPORT_OFF);
 $mysqli = mysqli_init();
 if (!$mysqli) {
     echo "ERROR: mysqli_init falló\n";
@@ -61,10 +64,17 @@ if (!$mysqli) {
 mysqli_options($mysqli, MYSQLI_OPT_CONNECT_TIMEOUT, 10);
 
 if ($ssl_ca !== '' && is_file($ssl_ca)) {
-    mysqli_ssl_set($mysqli, null, null, $ssl_ca, null, null);
+    $ssl_ok = @mysqli_ssl_set($mysqli, null, null, $ssl_ca, null, null);
+    echo "SSL_SET=" . ($ssl_ok ? 'yes' : 'no') . "\n";
+} else {
+    echo "SSL_SET=skipped\n";
 }
+@ob_flush(); @flush();
 
 $flags = defined('MYSQLI_CLIENT_SSL') ? MYSQLI_CLIENT_SSL : 0;
+echo "CONNECTING...\n";
+@ob_flush(); @flush();
+
 $ok = @mysqli_real_connect($mysqli, $db_host, $db_user, $db_pass, $db_name, $port, null, $flags);
 
 if ($ok) {
