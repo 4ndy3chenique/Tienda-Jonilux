@@ -84,6 +84,9 @@ jobs:
       - name: Configurar comando de inicio
         run: az webapp config set --name app-jonilux-store --resource-group tienda-jonilux --startup-file "/home/site/wwwroot/startup.sh"
 
+      - name: Esperar reinicio de SCM
+        run: sleep 30
+
       - name: Detener App Service
         run: az webapp stop --name app-jonilux-store --resource-group tienda-jonilux
 
@@ -99,6 +102,9 @@ jobs:
 
       - name: Arrancar App Service
         run: az webapp start --name app-jonilux-store --resource-group tienda-jonilux
+
+      - name: Esperar arranque
+        run: sleep 20
 
       - name: Diagnóstico
         if: always()
