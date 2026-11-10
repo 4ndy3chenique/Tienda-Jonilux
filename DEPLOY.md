@@ -39,6 +39,7 @@ El repositorio incluye el workflow de GitHub Actions (`.github/workflows/main_ap
 
 ## 5. Notas
 
-- El `.htaccess` usa una base dinámica: `/tienda/` en local y `/` en Azure. Si el App Service usa NGINX, este archivo se ignora; la imagen de WordPress de Azure ya gestiona los permalinks.
+- El `.htaccess` usa una base dinámica: `/tienda/` en local y `/` en Azure. En Linux, el App Service usa NGINX e ignora `.htaccess`. El repositorio incluye `nginx.conf` para los permalinks de WordPress. Si los enlaces permanentes fallan, en **Configuración → Configuración general → Comando de inicio** pon:
+  `cp /home/site/wwwroot/nginx.conf /etc/nginx/conf.d/default.conf`
 - Las subidas de `wp-content/uploads` se persisten en el almacenamiento del App Service gracias a `WEBSITES_ENABLE_APP_SERVICE_STORAGE=true`.
 - La base de datos ya fue importada en Azure con las URLs de producción.
