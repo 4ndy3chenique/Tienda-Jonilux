@@ -1,6 +1,6 @@
 <?php
 /**
- * Title: LUNARIS footer
+ * Title: JONILUX footer
  * Slug: lunaris/footer
  * Categories: featured
  * Inserter: no
@@ -19,7 +19,7 @@ $libro = home_url("/libro-de-reclamaciones/");
         <div class="lunaris-footer-grid">
             <!-- Columna 1: Marca y Empresa -->
             <div class="lunaris-footer-col brand-col">
-                <a class="lunaris-footer-logo-ext" href="<?php echo esc_url(home_url('/')); ?>">LUNARIS</a>
+                <a class="lunaris-footer-logo-ext" href="<?php echo esc_url(home_url('/')); ?>"><?php echo esc_html(get_bloginfo('name')); ?></a>
                 <p class="lunaris-footer-tagline">Esenciales urbanos. Moda moderna, precios claros y compra sin complicaciones.</p>
                 <div class="lunaris-company-info">
                     <p><strong>JONILUX S.A.C.</strong></p>
@@ -27,15 +27,15 @@ $libro = home_url("/libro-de-reclamaciones/");
                     <p>Av. Universitaria 1250, San Miguel, Lima</p>
                 </div>
                 <div class="lunaris-social-links">
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram de LUNARIS">
+                    <a href="https://instagram.com/jonilux.pe" target="_blank" rel="noopener noreferrer" aria-label="Instagram de JONILUX">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                        <span>Instagram</span>
+                        <span>@jonilux.pe</span>
                     </a>
-                    <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok de LUNARIS">
+                    <a href="https://tiktok.com/@jonilux.pe" target="_blank" rel="noopener noreferrer" aria-label="TikTok de JONILUX">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
                         <span>TikTok</span>
                     </a>
-                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook de LUNARIS">
+                    <a href="https://facebook.com/jonilux.pe" target="_blank" rel="noopener noreferrer" aria-label="Facebook de JONILUX">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                         <span>Facebook</span>
                     </a>
@@ -60,7 +60,7 @@ $libro = home_url("/libro-de-reclamaciones/");
                 <ul class="lunaris-footer-list">
                     <li><span><strong>Lima Metropolitana:</strong> Envíos 24 - 48 hrs</span></li>
                     <li><span><strong>Provincias:</strong> Olva / Shalom (2 a 4 días)</span></li>
-                    <li><span><strong>WhatsApp:</strong> <a href="https://wa.me/51987654321?text=Hola%20LUNARIS,%20tengo%20una%20consulta" target="_blank" rel="noopener noreferrer">+51 987 654 321</a></span></li>
+                    <li><span><strong>WhatsApp:</strong> <a href="https://wa.me/51987654321?text=Hola%20JONILUX,%20tengo%20una%20consulta" target="_blank" rel="noopener noreferrer">+51 987 654 321</a></span></li>
                     <li><span><strong>Email:</strong> soporte@jonilux.pe</span></li>
                     <li><span><strong>Horario:</strong> Lun a Sáb: 9:00 - 20:00</span></li>
                 </ul>
@@ -94,7 +94,7 @@ $libro = home_url("/libro-de-reclamaciones/");
         <div class="lunaris-footer-payments">
             <div class="lunaris-payments-label">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                <span>Pagos 100% Seguros y Encriptados:</span>
+                <span>Formas de pago</span>
             </div>
             <div class="lunaris-payment-badges">
                 <span class="pay-badge yape">YAPE</span>
@@ -109,7 +109,7 @@ $libro = home_url("/libro-de-reclamaciones/");
 
         <!-- Barra inferior: Derechos y Créditos -->
         <div class="lunaris-footer-bottom-bar">
-            <span>© <?php echo esc_html(wp_date('Y')); ?> LUNARIS by JONILUX S.A.C. — Todos los derechos reservados. RUC 20612345678.</span>
+            <span>© <?php echo esc_html(wp_date('Y')); ?> JONILUX S.A.C. — Todos los derechos reservados. RUC 20612345678.</span>
             <span>PROYECTO DE E-BUSINESS • UPN 2026</span>
         </div>
     </div>

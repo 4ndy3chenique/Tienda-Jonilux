@@ -1,0 +1,31 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+<!-- wp:group {"tagName":"main","className":"lunaris-catalog","layout":{"type":"default"}} -->
+<main class="wp-block-group lunaris-catalog">
+<!-- wp:pattern {"slug":"lunaris/catalog-header"} /-->
+<!-- wp:group {"className":"lunaris-catalog-grid","layout":{"type":"default"}} -->
+<div class="wp-block-group lunaris-catalog-grid">
+<!-- wp:group {"className":"lunaris-catalog-toolbar","layout":{"type":"flex","justifyContent":"space-between"}} -->
+<div class="wp-block-group lunaris-catalog-toolbar">
+<!-- wp:woocommerce/product-results-count /-->
+<!-- wp:woocommerce/catalog-sorting /-->
+</div><!-- /wp:group -->
+<!-- wp:woocommerce/product-collection {"queryId":11,"query":{"perPage":16,"pages":0,"offset":0,"postType":"product","order":"asc","orderBy":"title","search":"","exclude":[],"inherit":true,"isProductCollectionBlock":true},"tagName":"div","displayLayout":{"type":"flex","columns":4,"shrinkColumns":true},"queryContextIncludes":["collection"]} -->
+<div class="wp-block-woocommerce-product-collection">
+<!-- wp:woocommerce/product-collection-no-results -->
+<!-- wp:paragraph --><p>No encontramos productos con esta búsqueda. Prueba otra palabra o explora las categorías.</p><!-- /wp:paragraph -->
+<!-- /wp:woocommerce/product-collection-no-results -->
+<!-- wp:woocommerce/product-template -->
+<!-- wp:woocommerce/product-image {"showSaleBadge":false,"showProductLink":true,"isDescendentOfQueryLoop":true,"style":{"dimensions":{"aspectRatio":"3/4"}}} /-->
+<!-- wp:post-title {"level":2,"isLink":true,"__woocommerceNamespace":"woocommerce/product-collection/product-title"} /-->
+<!-- wp:woocommerce/product-price {"isDescendentOfQueryLoop":true} /-->
+<!-- wp:woocommerce/product-button {"isDescendentOfQueryLoop":true} /-->
+<!-- /wp:woocommerce/product-template -->
+<!-- wp:query-pagination {"paginationArrow":"arrow","layout":{"type":"flex","justifyContent":"space-between"}} -->
+<!-- wp:query-pagination-previous {"label":"Anterior"} /-->
+<!-- wp:query-pagination-numbers /-->
+<!-- wp:query-pagination-next {"label":"Siguiente"} /-->
+<!-- /wp:query-pagination -->
+</div><!-- /wp:woocommerce/product-collection -->
+</div><!-- /wp:group -->
+</main><!-- /wp:group -->
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

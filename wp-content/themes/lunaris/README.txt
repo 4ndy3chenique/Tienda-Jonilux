@@ -1,4 +1,4 @@
-﻿LUNARIS
+JONILUX
 =======
 Tema hijo de Fashion Nook. Activo en esta instalación de WordPress.
 

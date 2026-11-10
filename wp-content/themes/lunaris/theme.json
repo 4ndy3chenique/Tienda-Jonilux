@@ -38,8 +38,13 @@
       "fontFamilies": [
         {
           "slug": "lunaris-sans",
-          "name": "LUNARIS Sans",
-          "fontFamily": "Arial, Helvetica, sans-serif"
+          "name": "JONILUX Sans",
+          "fontFamily": "'Lunaris Inter', Arial, sans-serif"
+        },
+        {
+          "slug": "lunaris-editorial",
+          "name": "JONILUX Editorial",
+          "fontFamily": "'Lunaris Editorial', Georgia, serif"
         }
       ]
     }
@@ -50,14 +55,14 @@
       "text": "#111614"
     },
     "typography": {
-      "fontFamily": "Arial, Helvetica, sans-serif",
+      "fontFamily": "'Lunaris Inter', Arial, sans-serif",
       "fontStyle": "normal",
       "fontWeight": "400"
     },
     "elements": {
       "heading": {
         "typography": {
-          "fontFamily": "Arial, Helvetica, sans-serif",
+          "fontFamily": "'Lunaris Editorial', Georgia, serif",
           "fontStyle": "normal",
           "fontWeight": "400"
         }

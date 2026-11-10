@@ -12,7 +12,7 @@ const JONILUX_ENVIO_GRATIS = 150; // Mismo monto mínimo que las zonas de envío
 add_filter('woocommerce_package_rates', function ($rates) {
 	$hay_gratis = array_filter($rates, fn($r) => $r->get_method_id() === 'free_shipping');
 	if (!$hay_gratis) return $rates;
-	return array_filter($rates, fn($r) => $r->get_method_id() !== 'flat_rate');
+	return array_filter($rates, fn($r) => !($r->get_method_id() === 'flat_rate' && $r->get_instance_id() === 1));
 }, 100);
 
 // Mensajes de confianza bajo el botón "Finalizar compra"
@@ -21,7 +21,7 @@ add_filter('render_block_woocommerce/proceed-to-checkout-block', function ($html
 	return $html . '
 	<ul class="jonilux-confianza">
 		<li>' . $svg('<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>') . 'Pago seguro</li>
-		<li>' . $svg('<path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/>') . 'Cambios hasta 30 días</li>
+		<li>' . $svg('<path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/>') . 'Cambios hasta 7 días</li>
 		<li>' . $svg('<path d="M1 6h13v10H1z"/><path d="M14 9h4l3 3v4h-7"/><circle cx="5.5" cy="18" r="1.8"/><circle cx="17.5" cy="18" r="1.8"/>') . 'Envíos a todo el Perú</li>
 	</ul>';
 });
@@ -47,7 +47,8 @@ add_action('wp_enqueue_scripts', function () {
 			var totals = wp.data.select("wc/store/cart").getCartTotals();
 			if (!totals || !totals.total_items) { bar.hidden = true; return; }
 			var unit = Math.pow(10, totals.currency_minor_unit || 0);
-			var subtotal = (parseInt(totals.total_items, 10) + parseInt(totals.total_items_tax || 0, 10)) / unit;
+			var subtotal = Math.max(0, (parseInt(totals.total_items, 10) + parseInt(totals.total_items_tax || 0, 10)
+				- parseInt(totals.total_discount || 0, 10) - parseInt(totals.total_discount_tax || 0, 10)) / unit);
 			var items = wp.data.select("wc/store/cart").getCartData().itemsCount;
 			if (!items) { bar.hidden = true; return; }
 			bar.hidden = false;
@@ -55,8 +56,8 @@ add_action('wp_enqueue_scripts', function () {
 			var pct = Math.min(100, subtotal / META * 100);
 			var falta = Math.max(0, META - subtotal);
 			bar.innerHTML = (falta > 0
-				? "Te faltan <strong>S/ " + falta.toFixed(2) + "</strong> para el <strong>envío gratis</strong>"
-				: "Tu pedido tiene <strong>envío gratis</strong>") +
+				? "Te faltan <strong>S/ " + falta.toFixed(2) + "</strong> para el <strong>envío estándar gratis en Lima y Callao</strong>"
+				: "Tu pedido alcanza el mínimo para <strong>envío estándar gratis en Lima y Callao</strong>") +
 				"<div class=\"jonilux-envio__track\"><div class=\"jonilux-envio__fill\" style=\"width:" + pct + "%%\"></div></div>";
 		}
 

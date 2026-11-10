@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: JONILUX – Asistente Virtual y Chatbot (LUNA)
- * Description: Chatbot interactivo de atención al cliente e integración con WhatsApp para JONILUX / LUNARIS.
+ * Description: Chatbot interactivo de atención al cliente e integración con WhatsApp para JONILUX.
  */
 
 defined('ABSPATH') || exit;
@@ -10,7 +10,7 @@ add_action('wp_footer', function () {
     $numero_wa = '51987654321';
     $wa_url = 'https://wa.me/' . $numero_wa . '?text=' . rawurlencode('Hola JONILUX, necesito ayuda con una consulta sobre mi compra.');
     ?>
-    <!-- CHATBOT INTERACTIVO JONILUX / LUNARIS -->
+    <!-- CHATBOT INTERACTIVO JONILUX -->
     <div id="jonilux-chatbot-widget" class="jonilux-chatbot-container">
         <!-- Ventana del Chat -->
         <div id="jonilux-chat-window" class="jonilux-chat-window" style="display:none;" role="dialog" aria-label="Asistente Virtual JONILUX">

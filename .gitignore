@@ -1,5 +1,27 @@
 wp-content/uploads/wc-logs/
 wp-content/uploads/*/wc-logs/
 
-# Configuracion local con credenciales (usar wp-config-sample.php como plantilla)
-wp-config.php
+# Configuración local con credenciales (no subir)
+wp-config-local.php
+.local-backups/
+/.codex/
+
+# Herramientas internas y documentación de agentes
+/AGENTS.md
+/CLAUDE.md
+/AUDITORIA-FLUJOS.md
+/database/
+/scripts/
+/tests/
+
+# Respaldos y volcados
+*.sql
+*.sql.gz
+!/database/tienda_wp-actual-20261030.sql
+
+# Cachés y logs
+wp-content/cache/
+wp-content/upgrade/
+wp-content/backup*/
+wp-content/updraft*/
+wp-content/*.log

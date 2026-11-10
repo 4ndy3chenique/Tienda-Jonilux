@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Conservar los bytes exactos de la exportacion SQL verificada.
+/database/tienda_wp-actual-20261030.sql -text

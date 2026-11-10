@@ -68,7 +68,7 @@ function jonilux_fix_html_upload_urls($html) {
         return $html;
     }
     $target_base = content_url('/uploads/');
-    return preg_replace('#https?://[^/\"\'\s<>]+/.*?/wp-content/uploads/#i', $target_base, $html);
+    return preg_replace('#https?://[^/\"\'\s<>]+/[^\"\'\s<>]*?/wp-content/uploads/#i', $target_base, $html);
 }
 
 add_filter('the_content', 'jonilux_fix_html_upload_urls', 999);

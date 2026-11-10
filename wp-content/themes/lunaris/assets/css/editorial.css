@@ -1,0 +1,288 @@
+/* LUNARIS: sistema editorial. Fuentes locales incluidas en el tema padre. */
+@font-face {
+    font-family: "Lunaris Inter";
+    src: url("../../../fashion-nook/assets/fonts/inter/InterVariable.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Lunaris Editorial";
+    src: url("../../../fashion-nook/assets/fonts/eb-garamond/eb-garamond-400-normal.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Lunaris Editorial";
+    src: url("../../../fashion-nook/assets/fonts/eb-garamond/eb-garamond-400-italic.woff2") format("woff2");
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+}
+:root {
+    --lunaris-paper: #f7f5ef;
+    --lunaris-ink: #172a22;
+    --lunaris-muted: #59645b;
+    --lunaris-line: #dcded3;
+    --lunaris-accent: #c8d4af;
+    --lunaris-font-body: "Lunaris Inter", Arial, sans-serif;
+    --lunaris-font-display: "Lunaris Editorial", Georgia, serif;
+}
+body { background: var(--lunaris-paper); color: var(--lunaris-ink); font-family: var(--lunaris-font-body); font-size: 15px; line-height: 1.65; }
+h1, h2, h3 { font-family: var(--lunaris-font-display); font-weight: 400; letter-spacing: -.025em; }
+a, button, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid #41684e; outline-offset: 4px; }
+::selection { background: #d2ddbf; color: #172a22; }
+.woocommerce, .wp-block-woocommerce-product-collection { font-family: var(--lunaris-font-body); }
+
+/* Una sola barra informativa y un encabezado con busqueda real. */
+.lunaris-note { display: none; }
+#jonilux-promo-topbar { background: #172a22 !important; border: 0 !important; font-family: var(--lunaris-font-body) !important; letter-spacing: .045em !important; padding: 9px 24px !important; gap: 8px 20px !important; }
+#jonilux-promo-topbar > span { font-size: 11px; }
+#jonilux-copy-coupon-btn { border-radius: 3px !important; letter-spacing: .06em !important; padding: 4px 10px !important; }
+.lunaris-header { background: var(--lunaris-paper); padding: 24px clamp(24px,5vw,76px) !important; border-bottom: 1px solid var(--lunaris-line); }
+.wp-block-group.lunaris-header-inner { display: grid; grid-template-columns: auto minmax(0,1fr) auto auto; gap: 24px; max-width: 1400px; align-items: center; }
+.lunaris-logo { font-family: var(--lunaris-font-body); font-size: 26px !important; font-weight: 600 !important; letter-spacing: .2em; }
+.lunaris-header .lunaris-nav { justify-self: center; font-family: var(--lunaris-font-body); font-size: 11px; font-weight: 500; letter-spacing: .07em; }
+.lunaris-header .wp-block-navigation__container { gap: 24px; }
+.lunaris-header .wp-block-navigation-item__content { min-height: 40px; display: inline-flex; align-items: center; text-underline-offset: 7px; }
+.lunaris-header-search { grid-column: 3; grid-row: 1; width: 190px; margin: 0; }
+.lunaris-header-search .wp-block-search__inside-wrapper { border: 1px solid #d6dacd; border-radius: 6px; background: #eeefe7; padding: 0 3px 0 12px; }
+.lunaris-header-search input.wp-block-search__input { width: 100%; min-width: 0; padding: 10px 0; background: transparent; border: 0; font: 12px var(--lunaris-font-body); }
+.lunaris-header-search .wp-block-search__button { background: transparent; color: var(--lunaris-ink); border: 0; margin: 0; padding: 10px; min-height: 44px; min-width: 44px; }
+.lunaris-header .wp-block-woocommerce-mini-cart { grid-column: 4; grid-row: 1; }
+.lunaris-header .wc-block-mini-cart__button { padding: 10px; min-height: 44px; min-width: 44px; }
+
+/* Portada editorial: tipografia protagonista y fotografia sin oscurecer. */
+.lunaris-hero { display: grid; grid-template-columns: 1.04fr 1fr; align-items: center; gap: clamp(28px,4vw,64px); box-sizing: border-box; max-width: 1500px; margin: auto; padding: 48px clamp(24px,5vw,76px) 64px; min-height: 0; height: auto; max-height: none; background: var(--lunaris-paper); color: var(--lunaris-ink); overflow: visible; }
+.lunaris-hero::after { display: none; }
+.lunaris-hero-copy { width: auto; min-width: 0; padding: 12px 0; }
+.lunaris-eyebrow { color: #56674e; font: 500 11px/1.5 var(--lunaris-font-body); letter-spacing: .13em; text-transform: uppercase; margin-bottom: 20px; }
+.lunaris-hero-copy .lunaris-eyebrow { display: flex; align-items: center; gap: 12px; }
+.lunaris-hero h1 { color: var(--lunaris-ink); font-family: var(--lunaris-font-display); font-size: clamp(68px,7.4vw,112px); font-weight: 400; line-height: .98; letter-spacing: -.045em; margin: 0 0 28px; }
+.lunaris-hero h1 span { color: #4e694d; font-style: italic; }
+.lunaris-hero-copy > p:not(.lunaris-eyebrow) { color: var(--lunaris-muted); font-size: 15px; line-height: 1.85; max-width: 370px; margin-bottom: 28px; }
+.lunaris-hero-buttons { display: flex; align-items: center; gap: 12px; margin: 0; }
+.lunaris-button { gap: 28px; margin: 0; min-height: 50px; padding: 14px 21px; box-sizing: border-box; background: var(--lunaris-ink); color: #fff !important; border: 1px solid var(--lunaris-ink); border-radius: 4px; font: 500 12px/1.5 var(--lunaris-font-body); text-transform: none; letter-spacing: .015em; transition: background .18s ease, border-color .18s ease; }
+.lunaris-button:hover { background: #344d3b; border-color: #344d3b; }
+.lunaris-button.secondary { background: transparent; color: var(--lunaris-ink) !important; border-color: #bac3b4; }
+.lunaris-button.secondary:hover { background: #e8ecdf; }
+.lunaris-hero-meta { display: grid; gap: 3px; margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--lunaris-line); max-width: 370px; font-size: 11px; color: var(--lunaris-muted); letter-spacing: .02em; }
+.lunaris-hero-meta span:first-child { color: var(--lunaris-ink); font-weight: 500; }
+.lunaris-hero-visual { position: relative; margin: 0; min-width: 0; height: clamp(500px,45vw,650px); overflow: hidden; border-radius: 120px 8px 8px 8px; background: #24362d; }
+.lunaris-hero-visual img { width: 100%; height: 100%; object-fit: cover; object-position: 57% center; display: block; }
+.lunaris-hero-visual::after { content: ""; position: absolute; inset: 45% 0 0; background: linear-gradient(transparent,rgba(10,24,17,.78)); pointer-events: none; }
+.lunaris-hero-visual figcaption { position: absolute; z-index: 1; left: 32px; right: 24px; bottom: 24px; color: #fff; }
+.lunaris-hero-visual figcaption > span { font-size: 10px; text-transform: uppercase; letter-spacing: .15em; }
+.lunaris-hero-visual figcaption p { font: 400 38px/1.08 var(--lunaris-font-display); margin: 12px 0 0; }
+.lunaris-strip { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; padding: 24px max(24px,5vw); background: #e9ecdf; color: #344635; border-top: 1px solid #d9dfce; border-bottom: 1px solid #d9dfce; font: 500 11px/1.6 var(--lunaris-font-body); letter-spacing: .025em; text-transform: none; }
+.lunaris-strip span { padding: 0 18px; text-align: center; border-right: 1px solid #cdd5bf; }
+.lunaris-strip span:last-child { border: 0; }
+
+/* Descubrimiento y colecciones: pocas piezas, mejores jerarquias. */
+.lunaris-section { max-width: 1500px; box-sizing: border-box; padding: 76px clamp(24px,5vw,76px); }
+.lunaris-section-head { margin-bottom: 30px; align-items: end; }
+.lunaris-section h2 { font-family: var(--lunaris-font-display); font-size: clamp(38px,4vw,58px); line-height: 1.08; letter-spacing: -.025em; }
+.lunaris-section-head .lunaris-eyebrow { color: #56674e; margin-bottom: 12px; }
+.lunaris-section-sub { font-size: 14px; color: var(--lunaris-muted); line-height: 1.8; margin-top: 14px; }
+.lunaris-text-link { min-height: 44px; display: inline-flex; align-items: center; font-size: 12px; line-height: 1.5; border: 0; padding: 0; text-underline-offset: 6px; text-decoration: underline; }
+.lunaris-categories { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; }
+.lunaris-category { height: 390px; border-radius: 8px; }
+.lunaris-category:after { background: linear-gradient(transparent 28%,rgba(9,25,16,.86)); }
+.lunaris-category img { object-position: center; }
+.lunaris-category-label { left: 24px; right: 20px; bottom: 24px; gap: 12px; }
+.lunaris-category-label strong { font: 400 42px/1.1 var(--lunaris-font-display); }
+.lunaris-category-label small { display: block; font-size: 11px; line-height: 1.6; margin-top: 8px; color: #e5ebdd; }
+.lunaris-category-label .lunaris-cat-btn { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid #ffffff80; border-radius: 50%; padding: 0; background: transparent; color: #fff; font-size: 0; flex-shrink: 0; }
+.lunaris-category-label .lunaris-cat-btn::after { content: "↗"; font-size: 18px; }
+.lunaris-category:hover .lunaris-cat-btn { background: #e7eddc; color: var(--lunaris-ink); }
+.lunaris-category-tabs-bar { position: static; background: transparent; border: 0; padding: 0 clamp(24px,5vw,76px); max-width: 1500px; box-sizing: border-box; margin: 0 auto; }
+.lunaris-category-tabs-inner { gap: 8px; border-bottom: 1px solid var(--lunaris-line); padding: 8px 0 20px; }
+.tabs-label { font-size: 11px; font-weight: 400; text-transform: none; letter-spacing: 0; }
+.cat-tab-btn { box-shadow: none; min-height: 40px; display: inline-flex; align-items: center; border-radius: 4px; font-size: 12px; padding: 8px 16px; font-weight: 400; }
+.lunaris-products-grid { gap: 24px; margin-top: 24px; }
+.lunaris-product-card { border: 1px solid #e0e3d7; border-radius: 7px; background: #fff; padding: 8px; box-shadow: none; transition: border-color .2s, box-shadow .2s; }
+.lunaris-product-card:hover { transform: none; border-color: #acb99e; box-shadow: 0 12px 30px #172a220a; }
+.lunaris-product-thumb { border-radius: 3px; background: #f0f0eb; }
+.lunaris-card-badge { top: 10px; left: 10px; background: #f8f9f2ed; color: #314331; font-size: 9px; font-weight: 500; letter-spacing: .04em; padding: 5px 8px; border-radius: 3px; }
+.lunaris-card-details { padding: 17px 10px 10px; }
+.lunaris-card-title { font: 500 14px/1.55 var(--lunaris-font-body); color: var(--lunaris-ink); min-height: 44px; margin-bottom: 10px; }
+.lunaris-card-details .lunaris-product-price { font: 500 15px/1.5 var(--lunaris-font-body); margin: 0 0 16px; }
+.lunaris-card-cta { display: flex; align-items: center; justify-content: space-between; min-height: 44px; padding: 10px 13px; border-radius: 3px; background: #edf0e6; font: 500 11px/1.5 var(--lunaris-font-body); text-transform: none; letter-spacing: 0; }
+.lunaris-card-stars { margin-bottom: 8px; font-size: 12px; }
+.lunaris-story { background: #e9ecdf; border: 0; max-width: none; grid-template-columns: 1fr 1fr; padding: 64px max(24px,calc((100vw - 1348px)/2)); gap: 60px; }
+.lunaris-story h2 { max-width: 430px; }
+.lunaris-story p { font-size: 14px; line-height: 1.9; color: #4f5f4d; }
+
+/* Catalogo nativo: sigue usando consultas, orden y carrito de WooCommerce. */
+.lunaris-catalog { padding-bottom: 72px; }
+.lunaris-catalog-header { background: #e9ecdf; border-bottom: 1px solid #d9dfce; padding: 36px clamp(24px,5vw,76px) 40px; }
+.lunaris-catalog-header-inner { max-width: 1348px; margin: auto; }
+.lunaris-catalog-header .woocommerce-breadcrumb { font: 11px/1.6 var(--lunaris-font-body); margin: 0 0 24px; color: #586950; }
+.lunaris-catalog-header h1 { font: 400 clamp(42px,5vw,68px)/1.05 var(--lunaris-font-display); margin: 0 0 12px; overflow-wrap: anywhere; }
+.lunaris-catalog-header p { color: var(--lunaris-muted); max-width: 520px; font-size: 14px; }
+.lunaris-catalog-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.lunaris-catalog-links a { text-decoration: none; background: #f8f9f3; color: var(--lunaris-ink); padding: 8px 17px; min-height: 42px; display: inline-flex; align-items: center; box-sizing: border-box; border: 1px solid #cad2c0; border-radius: 4px; font-size: 12px; }
+.lunaris-catalog-links a[aria-current="page"], .lunaris-catalog-links a:hover { background: var(--lunaris-ink); color: #fff; border-color: var(--lunaris-ink); }
+.lunaris-catalog-grid { max-width: 1500px; margin: 40px auto 0; padding: 0 clamp(24px,5vw,76px); box-sizing: border-box; }
+.lunaris-catalog-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 28px; }
+.lunaris-catalog-toolbar .woocommerce-result-count { margin: 0; font-size: 12px; color: var(--lunaris-muted); }
+.lunaris-catalog-toolbar select { padding: 11px 14px; border: 1px solid #cfd5c6; border-radius: 4px; background: #fff; font: 12px var(--lunaris-font-body); min-height: 44px; }
+.lunaris-catalog .wc-block-product-template { gap: 26px 22px; }
+.lunaris-catalog .wp-block-woocommerce-product-collection .wc-block-product-template { grid-template-columns: repeat(4,minmax(0,1fr)); }
+.lunaris-catalog .wc-block-product-template > li { border: 1px solid #e0e3d7; border-radius: 7px; background: #fff; padding: 8px; overflow: hidden; transition: border-color .2s; }
+.lunaris-catalog .wc-block-product-template > li:hover { border-color: #aaba9f; }
+.lunaris-catalog .wc-block-components-product-image { border-radius: 3px; overflow: hidden; background: #f1f1ed; margin: 0; }
+.lunaris-catalog .wc-block-components-product-image img { aspect-ratio: 3/4; object-fit: cover; }
+.lunaris-catalog .wp-block-post-title { font: 500 14px/1.55 var(--lunaris-font-body) !important; letter-spacing: 0; padding: 0 10px; margin: 16px 0 8px !important; }
+.lunaris-catalog .wp-block-post-title a { text-decoration: none; }
+.lunaris-catalog .wp-block-woocommerce-product-price { font: 500 15px/1.5 var(--lunaris-font-body); padding: 0 10px; margin: 8px 0 16px; }
+.lunaris-catalog .wp-block-woocommerce-product-button { margin: 0 10px 10px; }
+.lunaris-catalog .wp-block-woocommerce-product-button .wp-block-button__link { background: #edf0e6; border: 1px solid #d8dfcf; color: var(--lunaris-ink); font: 500 12px/1.5 var(--lunaris-font-body); padding: 11px 8px; min-height: 44px; border-radius: 3px !important; }
+.lunaris-catalog .wp-block-woocommerce-product-button .wp-block-button__link:hover { background: var(--lunaris-ink); color: #fff; }
+.lunaris-catalog .wp-block-query-pagination { margin-top: 40px; font: 13px var(--lunaris-font-body); gap: 10px; }
+.lunaris-catalog .wp-block-query-pagination a, .lunaris-catalog .wp-block-query-pagination span { min-height: 40px; padding: 8px 13px; border-radius: 4px; }
+
+/* Ficha, formularios y compra: consistencia sin sustituir los controles nativos. */
+body.single-product h1.wp-block-post-title { font-family: var(--lunaris-font-display) !important; font-size: clamp(32px,3.5vw,48px) !important; font-weight: 400 !important; line-height: 1.12; }
+body.single-product .wc-block-product-template .wp-block-post-title { font: 500 14px/1.55 var(--lunaris-font-body); letter-spacing: 0; }
+.woocommerce .button, .woocommerce button.button, .wp-block-woocommerce-checkout .wc-block-components-button, .wp-block-woocommerce-cart .wc-block-components-button { font-family: var(--lunaris-font-body); border-radius: 4px !important; min-height: 46px; }
+.wp-block-woocommerce-cart, .wp-block-woocommerce-checkout { font-family: var(--lunaris-font-body); padding-top: 24px; }
+.wc-block-components-title.wc-block-components-title, .wc-block-components-checkout-step__title.wc-block-components-checkout-step__title { font-family: var(--lunaris-font-display); font-weight: 400; font-size: 28px; letter-spacing: -.02em; }
+.wc-block-components-text-input input, .wc-blocks-components-select__container select, .woocommerce form .input-text { border-color: #bfc8b7 !important; border-radius: 4px !important; background: #fff; font-family: var(--lunaris-font-body); }
+.wc-block-components-sidebar-layout .wc-block-components-sidebar { border: 1px solid #d9dfcf; border-radius: 7px; background: #fff; padding: 20px; box-sizing: border-box; }
+.wc-block-components-order-summary { font-family: var(--lunaris-font-body); }
+.woocommerce-account .woocommerce, .woocommerce-account .woocommerce :is(input,button,label,p) { font-family: var(--lunaris-font-body); }
+.woocommerce-account main .woocommerce { box-sizing: border-box; width: 100%; max-width: 1080px; margin: 24px auto; padding: 0 22px; }
+.woocommerce-account main > .wp-block-post-content { padding-top: 24px !important; padding-bottom: 64px !important; }
+.woocommerce-account .woocommerce .u-columns.col2-set { box-sizing: border-box; width: 100%; border-color: #d8dfce; border-radius: 8px; gap: 48px; padding: 40px; box-shadow: 0 15px 45px #172a2205; }
+.woocommerce-account .woocommerce .col2-set::before, .woocommerce-account .woocommerce .col2-set::after { content: none; }
+.woocommerce-account .woocommerce .u-column1 h2, .woocommerce-account .woocommerce .u-column2 h2 { font-family: var(--lunaris-font-display) !important; font-size: 30px !important; letter-spacing: 0 !important; text-transform: none !important; font-weight: 400 !important; }
+.woocommerce-account .woocommerce input:focus-visible { outline: 2px solid #41684e !important; outline-offset: 3px; }
+.jonilux-single-addons { font-family: var(--lunaris-font-body) !important; }
+.jonilux-single-addons > div, .jonilux-single-addons > a { border-radius: 5px !important; }
+
+/* Pie de pagina y utilidades con la misma identidad. */
+.lunaris-footer-extended { background: #172a22; border-top: 0; padding: 64px clamp(24px,5vw,76px) 28px; }
+.lunaris-footer-container { max-width: 1348px; }
+.lunaris-footer-grid { grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 38px; }
+.lunaris-footer-logo-ext { font-family: var(--lunaris-font-body); font-size: 27px; letter-spacing: .2em; }
+.lunaris-footer-tagline { font-size: 13px; line-height: 1.8; }
+.lunaris-footer-heading { color: #fff; font-size: 11px; letter-spacing: .1em; margin-bottom: 22px; }
+.lunaris-footer-list li { font-size: 12px; line-height: 1.9; margin-bottom: 10px; }
+.lunaris-company-info { font-size: 11px; line-height: 1.9; }
+.lunaris-footer-list li, .lunaris-footer-tagline, .lunaris-company-info, .lunaris-social-links a { color: #c1cebe; }
+.lunaris-reclamaciones-box { background: #20392c; border-color: #42533b; border-radius: 4px; }
+.lunaris-reclamaciones-text strong { color: #e2eccb; font-size: 10px; letter-spacing: .04em; }
+.lunaris-reclamaciones-icon svg { stroke: #e2eccb; }
+.lunaris-footer-payments { border-color: #ffffff24; padding: 22px 0; }
+.lunaris-payments-label { font-size: 12px; letter-spacing: 0; }
+.lunaris-payment-badges .pay-badge { background: transparent; border-color: #ffffff30; color: #e4ecd8; font-size: 10px; font-weight: 500; border-radius: 3px; }
+.lunaris-footer-bottom-bar { font-size: 10px; color: #b0c0aa; line-height: 1.8; }
+#jonilux-a11y-trigger { border-color: #b9caa5; background: #172a22; box-shadow: 0 4px 18px #172a2220; }
+.jonilux-chatbot-trigger { box-shadow: 0 4px 18px #172a2220 !important; }
+#jonilux-cookie-banner { border-color: #d3ddc5 !important; border-radius: 7px !important; box-shadow: 0 8px 40px #172a2215 !important; }
+
+@media (max-width: 1200px) {
+    .wp-block-group.lunaris-header-inner { gap: 16px; }
+    .lunaris-header .wp-block-navigation__container { gap: 16px; }
+    .lunaris-header-search { width: 160px; }
+    .lunaris-logo { font-size: 23px !important; }
+    .lunaris-categories { gap: 15px; }
+    .lunaris-category-label { left: 18px; }
+    .lunaris-category-label strong { font-size: 35px; }
+}
+@media (min-width: 781px) and (max-width: 1000px) {
+    .lunaris-header-search { width: 135px; }
+    .lunaris-header .wp-block-navigation__container { gap: 12px; }
+    .lunaris-header .lunaris-nav { font-size: 10px; }
+    .lunaris-hero h1 { font-size: 70px; }
+    .lunaris-hero-visual { height: 560px; }
+    .lunaris-hero-buttons { align-items: stretch; flex-direction: column; max-width: 260px; }
+    .lunaris-footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 781px) and (max-width: 1100px) {
+    .lunaris-catalog .wp-block-woocommerce-product-collection .wc-block-product-template { grid-template-columns: repeat(3,minmax(0,1fr)); }
+}
+@media (max-width: 780px) {
+    #jonilux-promo-topbar { padding: 8px 18px !important; gap: 5px 14px !important; }
+    #jonilux-promo-topbar > span { font-size: 10px; line-height: 1.7 !important; }
+    #jonilux-copy-coupon-btn { min-height: 28px; font-size: 9px !important; }
+    .lunaris-header { padding: 18px 22px !important; }
+    .wp-block-group.lunaris-header-inner { grid-template-columns: minmax(0,1fr) auto auto; gap: 12px 16px; }
+    .lunaris-header .lunaris-nav { grid-column: 2; grid-row: 1; margin-left: 0; }
+    .lunaris-header .wp-block-navigation__responsive-container-open { display: flex; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
+    .lunaris-header .wp-block-navigation__responsive-container:not(.is-menu-open) { display: none; }
+    .lunaris-header .wp-block-woocommerce-mini-cart { grid-column: 3; }
+    .lunaris-logo { font-size: 22px !important; }
+    .lunaris-header-search { width: 100%; grid-column: 1/-1; grid-row: 2; }
+    .lunaris-header-search input.wp-block-search__input { font-size: 13px; padding: 9px 0; }
+    .lunaris-header .wp-block-navigation__responsive-container.is-menu-open { padding: 32px 26px; background: var(--lunaris-paper); }
+    .lunaris-header .is-menu-open .wp-block-navigation__container { gap: 18px; }
+    .lunaris-header .is-menu-open .wp-block-navigation-item__content { font: 400 32px/1.2 var(--lunaris-font-display); text-transform: none; }
+    .lunaris-hero { grid-template-columns: 1fr; padding: 30px 22px 36px; gap: 30px; }
+    .lunaris-hero-copy { padding: 0; }
+    .lunaris-hero-copy .lunaris-eyebrow { font-size: 10px; margin-bottom: 18px; letter-spacing: .1em; }
+    .lunaris-hero h1 { font-size: clamp(62px,16vw,84px); line-height: .98; max-width: 450px; margin-bottom: 23px; }
+    .lunaris-hero-copy > p:not(.lunaris-eyebrow) { font-size: 14px; line-height: 1.8; margin-bottom: 24px; }
+    .lunaris-hero-buttons { gap: 10px; flex-wrap: wrap; }
+    .lunaris-button { min-height: 48px; padding: 13px 16px; font-size: 12px; gap: 16px; }
+    .lunaris-hero-meta { margin-top: 24px; padding-top: 16px; max-width: none; }
+    .lunaris-hero-visual { height: 360px; border-radius: 72px 5px 5px 5px; }
+    .lunaris-hero-visual img { object-position: 57% center; }
+    .lunaris-hero-visual figcaption { left: 24px; bottom: 24px; }
+    .lunaris-hero-visual figcaption p { font-size: 34px; }
+    .lunaris-strip { grid-template-columns: 1fr 1fr; padding: 20px 12px; row-gap: 18px; font-size: 10px; }
+    .lunaris-strip span:nth-child(even) { border: 0; }
+    .lunaris-strip span:last-child { display: block; }
+    .lunaris-section { padding: 48px 22px; }
+    .lunaris-section-head { flex-direction: column; align-items: start; gap: 16px; margin-bottom: 23px; }
+    .lunaris-section h2 { font-size: 40px; }
+    .lunaris-section-sub { font-size: 13px; margin-top: 12px; }
+    .lunaris-categories { grid-template-columns: 1fr; gap: 16px; }
+    .lunaris-category { height: 280px; }
+    .lunaris-category-label strong { font-size: 38px; }
+    .lunaris-category-label small { font-size: 11px; }
+    .lunaris-category-tabs-bar { padding: 0 22px; }
+    .lunaris-category-tabs-inner { padding-bottom: 16px; }
+    .tabs-label { display: none; }
+    .cat-tab-btn { flex-shrink: 0; }
+    .cat-tab-btn.all { margin-left: 0; }
+    .lunaris-products-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+    .lunaris-product-card { padding: 5px; }
+    .lunaris-card-badge { top: 6px; left: 6px; padding: 4px 6px; font-size: 8px; max-width: calc(100% - 12px); }
+    .lunaris-card-details { padding: 12px 5px 6px; }
+    .lunaris-card-title { font-size: 12px; min-height: 38px; line-height: 1.55; }
+    .lunaris-card-details .lunaris-product-price { font-size: 14px; margin-bottom: 12px; }
+    .lunaris-card-cta { font-size: 10px; padding: 8px; }
+    .lunaris-story { grid-template-columns: 1fr; gap: 22px; padding: 42px 22px; }
+    .lunaris-story p { font-size: 13px; }
+    .lunaris-catalog-header { padding: 25px 22px 30px; }
+    .lunaris-catalog-header h1 { font-size: 46px; }
+    .lunaris-catalog-grid { margin-top: 26px; padding: 0 20px; }
+    .lunaris-catalog-toolbar { align-items: start; flex-direction: column; gap: 12px; }
+    .lunaris-catalog-toolbar select { max-width: 100%; }
+    .lunaris-catalog .wc-block-product-template { gap: 18px 12px; }
+    .lunaris-catalog .wp-block-woocommerce-product-collection .wc-block-product-template { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    .lunaris-catalog .wc-block-product-template > li { padding: 5px; }
+    .lunaris-catalog .wp-block-post-title { font-size: 12px !important; padding: 0 5px; }
+    .lunaris-catalog .wp-block-woocommerce-product-price { font-size: 14px; padding: 0 5px; }
+    .lunaris-catalog .wp-block-woocommerce-product-button { margin: 0 5px 6px; }
+    .lunaris-catalog .wp-block-woocommerce-product-button .wp-block-button__link { font-size: 10px; }
+    .wc-block-components-sidebar-layout .wc-block-components-sidebar { padding: 16px; }
+    .woocommerce-account .woocommerce .u-columns.col2-set { padding: 24px 20px; gap: 30px; }
+    .lunaris-footer-extended { padding: 46px 22px 24px; }
+    .lunaris-footer-grid { grid-template-columns: 1fr 1fr; gap: 32px 20px; }
+    .lunaris-footer-grid .brand-col { grid-column: 1/-1; }
+    .lunaris-footer-grid .legal-col { grid-column: 1/-1; }
+    .lunaris-footer-heading { margin-bottom: 16px; }
+    .lunaris-footer-list li { font-size: 11px; }
+    .lunaris-footer-payments { gap: 16px; padding: 20px 0; }
+    .lunaris-footer-bottom-bar { font-size: 9px; }
+    #jonilux-cookie-banner { left: 14px !important; right: 14px !important; bottom: 74px !important; width: auto !important; max-width: none !important; padding: 18px !important; }
+    .jonilux-a11y-trigger, .jonilux-chatbot-trigger { width: 46px !important; height: 46px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .lunaris-product-thumb img, .lunaris-category img, .lunaris-button, .lunaris-product-card { transition: none; }
+}

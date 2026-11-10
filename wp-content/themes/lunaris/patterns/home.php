@@ -1,6 +1,6 @@
 <?php
 /**
- * Title: LUNARIS home
+ * Title: JONILUX home
  * Slug: lunaris/home
  * Categories: featured
  * Inserter: no
@@ -8,23 +8,30 @@
 if (!defined("ABSPATH")) { exit; }
 $base = get_stylesheet_directory_uri() . "/assets/images/";
 $shop = function_exists("wc_get_page_permalink") ? wc_get_page_permalink("shop") : home_url("/shop/");
+$brand = get_bloginfo('name');
+$collections = [];
+foreach (['hombre', 'mujer', 'accesorios'] as $slug) {
+    $term = get_term_by('slug', $slug, 'product_cat');
+    $link = $term ? get_term_link($term) : $shop;
+    $collections[$slug] = ['url' => is_wp_error($link) ? $shop : $link, 'count' => $term ? (int) $term->count : 0];
+}
 
 // Helper seguro para renderizar tarjetas de producto
 if (!function_exists('lunaris_render_product_card')) {
     function lunaris_render_product_card($product, $base) {
         $pid = $product->get_id();
         $permalink = esc_url($product->get_permalink());
-        $title = esc_html($product->get_name());
+        $title = $product->get_name();
         $price_html = $product->get_price_html();
         $image_id = $product->get_image_id();
         $image_url = $image_id ? wp_get_attachment_image_url($image_id, 'large') : esc_url($base . 'accessories.webp');
         
         $terms = get_the_terms($pid, 'product_cat');
-        $cat_name = 'LUNARIS';
+        $cat_name = get_bloginfo('name');
         if (!empty($terms) && !is_wp_error($terms)) {
             foreach ($terms as $t) {
                 if ($t->slug !== 'uncategorized' && $t->slug !== 'hombre' && $t->slug !== 'mujer') {
-                    $cat_name = esc_html($t->name);
+                    $cat_name = $t->name;
                     break;
                 }
             }
@@ -32,32 +39,24 @@ if (!function_exists('lunaris_render_product_card')) {
         
         $rating = $product->get_average_rating();
         $rating_count = $product->get_rating_count();
-        if ($rating_count == 0) {
-            $rating = 5.0; // Puntuación referencial de calidad
-        }
         ?>
         <article class="lunaris-product-card">
             <a href="<?php echo $permalink; ?>" class="lunaris-card-link">
                 <div class="lunaris-product-thumb">
                     <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($title); ?>" width="1200" height="1600" loading="lazy">
-                    <span class="lunaris-card-badge"><?php echo $cat_name; ?></span>
+                    <span class="lunaris-card-badge"><?php echo esc_html($cat_name); ?></span>
                 </div>
                 <div class="lunaris-card-details">
-                    <div class="lunaris-card-stars" aria-label="Calificación 5 de 5 estrellas">
-                        <span class="star-icon">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="#f39c12"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="#f39c12"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="#f39c12"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="#f39c12"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="#f39c12"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        </span>
-                        <small>(<?php echo number_format($rating, 1); ?>)</small>
+                    <?php if ($rating_count > 0) : ?>
+                    <div class="lunaris-card-stars">
+                            <?php echo wc_get_rating_html((float) $rating, $rating_count); ?>
                     </div>
-                    <h3 class="lunaris-card-title"><?php echo $title; ?></h3>
+                    <?php endif; ?>
+                    <h3 class="lunaris-card-title"><?php echo esc_html($title); ?></h3>
                     <div class="lunaris-product-price">
                         <?php echo $price_html; ?>
                     </div>
-                    <span class="lunaris-card-cta">Ver Prenda <span aria-hidden="true">↗</span></span>
+                    <span class="lunaris-card-cta">Ver producto <span aria-hidden="true">↗</span></span>
                 </div>
             </a>
         </article>
@@ -68,7 +67,7 @@ if (!function_exists('lunaris_render_product_card')) {
 // Consultas segmentadas por categoría
 $hombre_products = function_exists('wc_get_products') ? wc_get_products([
     'status' => 'publish',
-    'limit' => 8,
+    'limit' => 4,
     'category' => ['hombre'],
     'orderby' => 'date',
     'order' => 'DESC'
@@ -76,7 +75,7 @@ $hombre_products = function_exists('wc_get_products') ? wc_get_products([
 
 $mujer_products = function_exists('wc_get_products') ? wc_get_products([
     'status' => 'publish',
-    'limit' => 8,
+    'limit' => 4,
     'category' => ['mujer'],
     'orderby' => 'date',
     'order' => 'DESC'
@@ -95,21 +94,20 @@ $accesorios_products = function_exists('wc_get_products') ? wc_get_products([
 
     <!-- HERO SECTION -->
     <section class="lunaris-hero" aria-labelledby="lunaris-title">
-        <img src="<?php echo esc_url($base . 'hero.webp'); ?>" alt="Estilo urbano LUNARIS: conjunto negro en una calle de la ciudad" width="1920" height="700" fetchpriority="high">
         <div class="lunaris-hero-copy">
-            <p class="lunaris-eyebrow">LUNARIS / Urban Essentials 2026</p>
-            <h1 id="lunaris-title">Tu estilo.<br>Tu propia<br><span>órbita.</span></h1>
+            <p class="lunaris-eyebrow"><span aria-hidden="true">—</span> <?php echo esc_html($brand); ?> / Esenciales urbanos</p>
+            <h1 id="lunaris-title">Tu estilo.<br><span>Tu propia órbita.</span></h1>
             <p>Esenciales urbanos con cortes contemporáneos, precios transparentes y sin complicaciones.</p>
             <div class="lunaris-hero-buttons">
-                <a class="lunaris-button" href="#coleccion-hombre">Colección Hombre <span aria-hidden="true">↓</span></a>
-                <a class="lunaris-button secondary" href="#coleccion-mujer">Colección Mujer <span aria-hidden="true">↓</span></a>
+                <a class="lunaris-button" href="<?php echo esc_url($shop); ?>">Explorar la colección <span aria-hidden="true">↗</span></a>
+                <a class="lunaris-button secondary" href="#colecciones">Ver categorías <span aria-hidden="true">↓</span></a>
             </div>
+            <div class="lunaris-hero-meta"><span>Hombre · Mujer · Accesorios</span><span>Encuentra eso que va contigo.</span></div>
         </div>
-        <div class="lunaris-hero-bottom">
-            <span>Confección peruana de calidad</span>
-            <span>Envíos a todo el Perú</span>
-            <span>Prendas / Accesorios / Actitud</span>
-        </div>
+        <figure class="lunaris-hero-visual">
+            <img src="<?php echo esc_url($base . 'hero.webp'); ?>" alt="Conjunto urbano negro en una calle de la ciudad" width="1920" height="700" fetchpriority="high">
+            <figcaption><span>01 / Esencia urbana</span><p>Menos ruido.<br>Más personalidad.</p></figcaption>
+        </figure>
     </section>
 
     <!-- BANNER DE GARANTÍAS / BENEFICIOS -->
@@ -117,7 +115,7 @@ $accesorios_products = function_exists('wc_get_products') ? wc_get_products([
         <span>Envíos Lima 24-48h y Provincias</span>
         <span>Yape / Plin / Transferencia / Contra Entrega</span>
         <span>Garantía de cambio por 7 días</span>
-        <span>Guía de tallas oficial JONILUX</span>
+        <span>Guía de tallas oficial <?php echo esc_html($brand); ?></span>
     </div>
 
     <!-- SECCIÓN 01: SEGMENTACIÓN DE CATEGORÍAS -->
@@ -127,27 +125,34 @@ $accesorios_products = function_exists('wc_get_products') ? wc_get_products([
                 <p class="lunaris-eyebrow">01 / Categorías Principales</p>
                 <h2 id="colecciones-title">Elige tu categoría</h2>
             </div>
-            <a class="lunaris-text-link" href="<?php echo esc_url($shop); ?>">Ver catálogo completo (<?php echo (count($hombre_products) + count($mujer_products)); ?>+) ↗</a>
+            <a class="lunaris-text-link" href="<?php echo esc_url($shop); ?>">Ver catálogo completo ↗</a>
         </div>
         <div class="lunaris-categories">
-            <a class="lunaris-category" href="#coleccion-hombre">
+            <a class="lunaris-category" href="<?php echo esc_url($collections['hombre']['url']); ?>">
                 <img src="<?php echo esc_url($base.'men.webp'); ?>" alt="Colección de ropa urbana para hombre: hoodies y polos" width="1920" height="500" loading="lazy">
                 <div class="lunaris-category-label">
                     <div>
                         <strong>Hombre</strong>
-                        <small style="display:block;font-size:12px;opacity:.9;">Polos oversize, hoodies, joggers y camisas</small>
+                        <small><?php echo (int) $collections['hombre']['count']; ?> productos · Tu esencia, sin reglas</small>
                     </div>
                     <span class="lunaris-cat-btn">Ver Colección ↗</span>
                 </div>
             </a>
-            <a class="lunaris-category" href="#coleccion-mujer">
+            <a class="lunaris-category" href="<?php echo esc_url($collections['mujer']['url']); ?>">
                 <img src="<?php echo esc_url($base.'women.webp'); ?>" alt="Colección de ropa urbana para mujer: tops, vestidos y faldas" width="1920" height="500" loading="lazy">
                 <div class="lunaris-category-label">
                     <div>
                         <strong>Mujer</strong>
-                        <small style="display:block;font-size:12px;opacity:.9;">Tops, blusas, vestidos, faldas y sweaters</small>
+                        <small><?php echo (int) $collections['mujer']['count']; ?> productos · A tu manera</small>
                     </div>
                     <span class="lunaris-cat-btn">Ver Colección ↗</span>
+                </div>
+            </a>
+            <a class="lunaris-category" href="<?php echo esc_url($collections['accesorios']['url']); ?>">
+                <img src="<?php echo esc_url($base.'accessories.webp'); ?>" alt="Selección de accesorios para completar tu estilo" width="1200" height="800" loading="lazy">
+                <div class="lunaris-category-label">
+                    <div><strong>Accesorios</strong><small><?php echo (int) $collections['accesorios']['count']; ?> productos · El detalle hace la diferencia</small></div>
+                    <span class="lunaris-cat-btn" aria-hidden="true">↗</span>
                 </div>
             </a>
         </div>
@@ -157,8 +162,8 @@ $accesorios_products = function_exists('wc_get_products') ? wc_get_products([
     <div class="lunaris-category-tabs-bar">
         <div class="lunaris-category-tabs-inner">
             <span class="tabs-label">Explorar por categoría:</span>
-            <a href="#coleccion-hombre" class="cat-tab-btn active">Ropa de Hombre (41)</a>
-            <a href="#coleccion-mujer" class="cat-tab-btn">Ropa de Mujer (42)</a>
+            <a href="#coleccion-hombre" class="cat-tab-btn">Hombre</a>
+            <a href="#coleccion-mujer" class="cat-tab-btn">Mujer</a>
             <a href="#accesorios" class="cat-tab-btn">Accesorios & Calzado</a>
             <a href="<?php echo esc_url($shop); ?>" class="cat-tab-btn all">Todo el Catálogo</a>
         </div>
@@ -172,7 +177,7 @@ $accesorios_products = function_exists('wc_get_products') ? wc_get_products([
                 <h2 id="hombre-title">Ropa de Hombre</h2>
                 <p class="lunaris-section-sub">Polos de alto gramaje, hoodies urbanos, sobrecamisas vintage y pantalones cargo.</p>
             </div>
-            <a class="lunaris-text-link" href="<?php echo esc_url(home_url('/categoria-producto/hombre/')); ?>">Ver toda la ropa de hombre (41) ↗</a>
+            <a class="lunaris-text-link" href="<?php echo esc_url($collections['hombre']['url']); ?>">Explorar hombre ↗</a>
         </div>
 
         <div class="lunaris-products-grid">
@@ -194,7 +199,7 @@ $accesorios_products = function_exists('wc_get_products') ? wc_get_products([
                 <h2 id="mujer-title">Ropa de Mujer</h2>
                 <p class="lunaris-section-sub">Tops contemporáneos, vestidos ligeros, faldas casuales y cardigans con estilo urbano.</p>
             </div>
-            <a class="lunaris-text-link" href="<?php echo esc_url(home_url('/categoria-producto/mujer/')); ?>">Ver toda la ropa de mujer (42) ↗</a>
+            <a class="lunaris-text-link" href="<?php echo esc_url($collections['mujer']['url']); ?>">Explorar mujer ↗</a>
         </div>
 
         <div class="lunaris-products-grid">
@@ -216,7 +221,7 @@ $accesorios_products = function_exists('wc_get_products') ? wc_get_products([
                 <h2 id="accesorios-title">Accesorios & Calzado</h2>
                 <p class="lunaris-section-sub">Complementa tu outfit con gorras de diseño minimalista, pulseras de hematita y zapatillas urbanas.</p>
             </div>
-            <a class="lunaris-text-link" href="<?php echo esc_url(home_url('/categoria-producto/accesorios/')); ?>">Ver todos los accesorios ↗</a>
+            <a class="lunaris-text-link" href="<?php echo esc_url($collections['accesorios']['url']); ?>">Explorar accesorios ↗</a>
         </div>
 
         <div class="lunaris-products-grid">
@@ -233,7 +238,7 @@ $accesorios_products = function_exists('wc_get_products') ? wc_get_products([
     <!-- MANIFIESTO DE MARCA -->
     <section class="lunaris-section lunaris-story" id="lunaris" aria-labelledby="story-title">
         <div>
-            <p class="lunaris-eyebrow">El universo JONILUX / LUNARIS</p>
+            <p class="lunaris-eyebrow">El universo <?php echo esc_html($brand); ?></p>
             <h2 id="story-title">Vestir también es expresarte.</h2>
         </div>
         <div>
