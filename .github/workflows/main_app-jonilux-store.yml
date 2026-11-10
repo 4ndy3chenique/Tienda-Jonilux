@@ -77,7 +77,8 @@ jobs:
             DB_HOST=mysql-jonilux-db.mysql.database.azure.com \
             WP_HOME=https://app-jonilux-store-ddhpbxfdd5a4g6ff.brazilsouth-01.azurewebsites.net \
             WP_SITEURL=https://app-jonilux-store-ddhpbxfdd5a4g6ff.brazilsouth-01.azurewebsites.net \
-            DB_SSL=false \
+            DB_SSL=true \
+            MYSQL_SSL_CA=/home/site/wwwroot/bin/DigiCertGlobalRootG2.crt.pem \
             WEBSITES_PHP_VERSION=8.5 \
             WEBSITES_ENABLE_APP_SERVICE_STORAGE=true
 
