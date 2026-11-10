@@ -85,8 +85,7 @@ jobs:
         run: az webapp config set --name app-jonilux-store --resource-group tienda-jonilux --startup-file "/home/site/wwwroot/startup.sh"
 
       - name: Detener App Service
-        if: ${{ env.AZURE_RESOURCE_GROUP != '' }}
-        run: az webapp stop --name app-jonilux-store --resource-group "$AZURE_RESOURCE_GROUP"
+        run: az webapp stop --name app-jonilux-store --resource-group tienda-jonilux
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
@@ -97,11 +96,9 @@ jobs:
           package: .
           clean: true
           restart: true
-          resource-group-name: ${{ secrets.AZURE_RESOURCE_GROUP }}
 
       - name: Arrancar App Service
-        if: ${{ env.AZURE_RESOURCE_GROUP != '' }}
-        run: az webapp start --name app-jonilux-store --resource-group "$AZURE_RESOURCE_GROUP"
+        run: az webapp start --name app-jonilux-store --resource-group tienda-jonilux
 
       - name: Diagnóstico
         run: |
