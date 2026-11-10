@@ -1,12 +1,14 @@
 #!/bin/bash
-set -e
+echo "startup.sh: inicio"
 
-if [ -f /etc/nginx/sites-available/default ]; then
-    cp /home/site/wwwroot/nginx.conf /etc/nginx/sites-available/default
-fi
+for f in /etc/nginx/sites-available/default /etc/nginx/conf.d/default.conf; do
+  if [ -f "$f" ]; then
+    echo "Copied nginx.conf to $f"
+    cp /home/site/wwwroot/nginx.conf "$f"
+  fi
+done
 
-if [ -f /etc/nginx/conf.d/default.conf ]; then
-    cp /home/site/wwwroot/nginx.conf /etc/nginx/conf.d/default.conf
-fi
+nginx -t || true
+service nginx reload || nginx -s reload || true
 
-service nginx reload
+echo "startup.sh: fin"

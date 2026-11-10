@@ -100,3 +100,10 @@ jobs:
       - name: Arrancar App Service
         if: ${{ env.AZURE_RESOURCE_GROUP != '' }}
         run: az webapp start --name app-jonilux-store --resource-group "$AZURE_RESOURCE_GROUP"
+
+      - name: Diagnóstico
+        run: |
+          echo "=== STARTUP COMMAND ==="
+          az webapp config show --name app-jonilux-store --resource-group tienda-jonilux --query siteConfig.startupCommand -o tsv
+          echo "=== NGINX CONFIG ==="
+          az webapp ssh --name app-jonilux-store --resource-group tienda-jonilux --command "cat /etc/nginx/sites-available/default" 2>&1 | head -n 80 || true
