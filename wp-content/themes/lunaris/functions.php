@@ -19,3 +19,19 @@ add_action('wp_head', function () {
     <!-- End Google Tag Manager -->
     <?php
 });
+
+// Google Analytics 4 (gtag.js) - JONILUX Store
+add_action('wp_head', function () {
+    ?>
+    <!-- Google tag (gtag.js) - Jonilux Store -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B6X1PJZWQZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-B6X1PJZWQZ');
+    </script>
+    <!-- End Google Analytics 4 -->
+    <?php
+}, 1);
