@@ -60,7 +60,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: php-app
-      
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -85,11 +85,9 @@ jobs:
       - name: Configurar comando de inicio
         run: az webapp config set --name app-jonilux-store --resource-group tienda-jonilux --startup-file "/home/site/wwwroot/startup.sh"
 
+      # Espera a que SCM/Kudu termine de reiniciar tras cambios de configuración
       - name: Esperar reinicio de SCM
         run: sleep 30
-
-      - name: Detener App Service
-        run: az webapp stop --name app-jonilux-store --resource-group tienda-jonilux
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
@@ -100,9 +98,6 @@ jobs:
           package: .
           clean: true
           restart: true
-
-      - name: Arrancar App Service
-        run: az webapp start --name app-jonilux-store --resource-group tienda-jonilux
 
       - name: Esperar arranque
         run: sleep 20
